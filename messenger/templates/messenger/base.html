@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{% block title %}
+				Messenger
+			{% endblock %}
+		</title>
+		<meta charset="utf-8" />
+
+		{% load staticfiles %}
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yantramanav" />
+		<link rel="stylesheet" type="text/css" href={% static 'messenger/css/style.css' %} />
+
+		<!-- JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<!-- Navigation bar -->
+			<nav class="navbar navbar-inverse">
+
+				<!-- Navbar header -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{% url 'messenger:index' %}">
+						&emsp;<span class="glyphicon glyphicon-home"></span>&emsp;
+					</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<!-- Navbar items -->
+				<div class="collapse navbar-collapse" id="navBar">
+
+					<!-- Left floating -->
+					<ul class="nav navbar-nav">
+						<!-- Conversations -->
+						<li class="">
+							<a href="{% url 'messenger:conversations' %}">
+								&emsp;<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&emsp;
+							</a>
+						</li>
+					</ul>
+
+					<!-- Right floating -->
+					<ul class="nav navbar-nav navbar-right">
+						<!-- Log out -->
+						<li class="">
+							<a href="{% url 'messenger:logout' %}">
+								&emsp;<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&emsp;
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<div class="col-md-12">
+			{% block content %}
+			{% endblock %}
+			</div>
+		</div>
+
+		<!-- This is down here to ensure base scripts have already loaded -->
+		{% block scripts %}
+		{% endblock %}
+	</body>
+</html>

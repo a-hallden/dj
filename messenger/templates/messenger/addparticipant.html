@@ -1,0 +1,17 @@
+{% extends 'messenger/base.html' %}
+
+{% block title %}
+	Add user to conversation
+{% endblock %}
+
+{% block content %}
+	<h3>Add new participant to {{ conversation.conversation_name }}</h3>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="btn btn-primary">Add to conversation</button>
+	</form>
+
+	<!-- Print error message if there is one -->
+	<p style="font-size: 1.5em; color: red;">{{ error }}</p>
+{% endblock %}

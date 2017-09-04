@@ -1,0 +1,42 @@
+{% extends 'messenger/base.html' %}
+
+{% block content %}
+	<div class="col-md-12">
+		<h2>All conversations</h2>
+		<div class="panel panel-default">
+			<div class="panel-body">
+
+				<!-- Container for the table itself -->
+				{% if all_conversations %}
+					<div class="table-container">
+						<table class="table table-striped">
+							<tbody>
+								{% for conversation in all_conversations %}
+									<tr>
+										<th>
+											<a href="{% url 'messenger:conversation' conversation.pk %}">
+												{{ conversation.conversation_name }}
+											</a>
+										</th>
+									<td>{{ conversation.created }}</td>
+									</tr>
+								{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				{% else %}
+					<div class="alert alert-info">
+						<strong>Nothing to see here!</strong> You are not in any conversations right now.
+					</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<h2>Start a conversation</h2>
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class="btn btn-primary" type="submit">Start conversation</button>
+		</form>
+	</div>
+{% endblock %}

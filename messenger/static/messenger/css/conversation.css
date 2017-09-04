@@ -1,0 +1,14 @@
+.panel {
+  height: 60vh;
+  overflow: auto;
+}
+
+.panel-heading {
+  position: sticky;
+  z-index: 99999;
+  top: 0;
+}
+
+textarea {
+  width: 100%;
+}
