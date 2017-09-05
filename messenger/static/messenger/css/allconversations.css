@@ -1,0 +1,7 @@
+.headingright {
+    float: right;
+}
+
+#newConversationForm {
+    display: none;
+  }

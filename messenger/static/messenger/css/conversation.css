@@ -12,3 +12,14 @@
 textarea {
   width: 100%;
 }
+
+.messagerow {
+  padding: 10px;
+  margin: 10px;
+  background-color: #f2f2f2;
+}
+
+.addparticipant {
+  z-index: 99999;
+  bottom: 0;
+}

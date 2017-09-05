@@ -31,21 +31,17 @@ class MessageViewSet(viewsets.ModelViewSet):
 		# as owner of the new message object
 
 # Views
-# Index
-def index(request):
-	if request.user.is_authenticated():
-		return render(request, 'messenger/index.html')
-	else:
-		return redirect('messenger:login')
-
 # All conversations
 class AllConversationsView(generic.TemplateView):
 	template_name = 'messenger/allconversations.html'
 
 	def get(self, request):
-		form = NewConversationForm()
-		all_conversations = self.request.user.conversation_set.all().order_by('created')
-		return render(request, self.template_name, {'form': form, 'all_conversations': all_conversations})
+		if request.user.is_authenticated():
+			form = NewConversationForm()
+			all_conversations = self.request.user.conversation_set.all().order_by('created')
+			return render(request, self.template_name, {'form': form, 'all_conversations': all_conversations})
+		else:
+			return redirect('messenger:login')
 
 	def post(self, request):
 		form = NewConversationForm(request.POST)
@@ -64,9 +60,10 @@ class ConversationView(generic.TemplateView):
 		conversation = Conversation.objects.get(pk=conversation_id)
 		participants = conversation.participants.all()
 		messages = conversation.message_set.all().order_by('timestamp')
-		form = MessageForm()
+		messageform = MessageForm()
+		participantform = AddParticipantForm()
 		return render(request, 'messenger/conversation.html',
-			{'form': form, 'conversation': conversation, 'participants': participants, 'messages': messages, 'pk': conversation_id})
+			{'messageform': messageform, 'participantform': participantform, 'conversation': conversation, 'participants': participants, 'messages': messages, 'pk': conversation_id})
 
 	def post(self, request, conversation_id):
 		form = MessageForm(request.POST)
@@ -180,7 +177,7 @@ def register(request):
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				login(request, user)
-				return redirect('messenger:index')
+				return redirect('messenger:conversations')
 	else:
 		form = UserCreationForm()
 

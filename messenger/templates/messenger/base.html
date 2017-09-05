@@ -27,7 +27,7 @@
 
 				<!-- Navbar header -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="{% url 'messenger:index' %}">
+					<a class="navbar-brand" href="{% url 'messenger:conversations' %}">
 						&emsp;<span class="glyphicon glyphicon-home"></span>&emsp;
 					</a>
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
@@ -39,17 +39,6 @@
 
 				<!-- Navbar items -->
 				<div class="collapse navbar-collapse" id="navBar">
-
-					<!-- Left floating -->
-					<ul class="nav navbar-nav">
-						<!-- Conversations -->
-						<li class="">
-							<a href="{% url 'messenger:conversations' %}">
-								&emsp;<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&emsp;
-							</a>
-						</li>
-					</ul>
-
 					<!-- Right floating -->
 					<ul class="nav navbar-nav navbar-right">
 						<!-- Log out -->

@@ -11,6 +11,7 @@
 {% block scripts %}
   {% load staticfiles %}
   <link rel="stylesheet" type="text/css" href={% static 'messenger/css/conversation.css' %} />
+  <script src="{% static 'messenger/js/conversation.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +30,7 @@
     <div class="panel-body">
       {% if messages %}
         {% for message in messages %}
-          <p>
+          <div class="messagerow">
             <strong class="text-muted">{{ message.sent_by }}</strong>
             <small class="text-muted">{{ message.timestamp }}</small>
             <span style="float: right; padding-top: 5px;"
@@ -42,18 +43,27 @@
   							<span class="glyphicon glyphicon-trash"></span>
   						</a>
             </span>
-
             <br />
             {{ message.message_text }}
-          </p>
+          </div>
         {% endfor %}
         {% else %}
           <p>Nothing to see here...</p>
         {% endif %}
       </div>
     </div>
+
+    <div>
+        <!-- Form to send message in the selected conversation -->
+        <form method="post" class="input">
+          {% csrf_token %}
+          {{ messageform.as_p }}
+          <button type="submit" class="btn btn-primary" id="sendmessage">Send</button>
+        </form>
+      </div>
   </div>
 
+  <!-- Right floaing participants section -->
   <div class="col-md-3" style="float: right;">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -73,21 +83,22 @@
       				<li>{{ p.username }}</li>
       			{% endfor %}
       		</ul>
-      	{% endif %}
+        {% endif %}
+        
+        <!-- Print error message if there is one -->
+        <p style="font-size: 1.5em; color: red;">{{ error }}</p>
       </div>
     </div>
-  </div>
+<!-- 
+    <div class="addparticipant">
+        <form method="post">
+          {% csrf_token %}
+          {{ participantform.as_p }}
+          <button type="submit" class="btn btn-primary">Add to conversation</button>
+        </form>
+      </div>
+  </div> -->
 
-  <div class="col-md-12">
-    <!-- Form to send message in the selected conversation -->
-    <form method="post" class="input">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Send</button>
-    </form>
-
-
-    {{ error }}
-  </div>
+ 
 
 {% endblock %}

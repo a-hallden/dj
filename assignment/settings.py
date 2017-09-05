@@ -28,7 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Redirects user to index page upon login
-LOGIN_REDIRECT_URL = 'messenger:index'
+LOGIN_REDIRECT_URL = 'messenger:conversations'
+LOGIN_URL = 'messenger:login'
 
 # Application definition
 
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'messenger.apps.MessengerConfig',
-    'restfultesting.apps.RestfultestingConfig',
     'rest_framework',
 ]
 

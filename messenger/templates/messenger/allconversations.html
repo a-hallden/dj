@@ -1,9 +1,20 @@
 {% extends 'messenger/base.html' %}
 
+{% block scripts %}
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href={% static 'messenger/css/allconversations.css' %} />
+	<script src={% static 'messenger/js/allconversations.js' %}></script>
+{% endblock %}
+
 {% block content %}
 	<div class="col-md-12">
-		<h2>All conversations</h2>
 		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="headingleft">
+					All conversations
+					<button class="btn btn-primary headingright" onclick=(newConversation())>+</button>
+				</h2>
+			</div>
 			<div class="panel-body">
 
 				<!-- Container for the table itself -->
@@ -32,11 +43,14 @@
 			</div>
 		</div>
 
-		<h2>Start a conversation</h2>
-		<form method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button class="btn btn-primary" type="submit">Start conversation</button>
-		</form>
+		<div id="newConversationForm">
+			<h2>Start a conversation</h2>
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-primary" type="submit">Start conversation</button>
+			</form>
+		</div>
 	</div>
+	
 {% endblock %}

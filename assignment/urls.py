@@ -18,6 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
 	url(r'^messenger/', include('messenger.urls')),
-    url(r'^restfultesting/', include('restfultesting.urls')),
     url(r'^admin/', admin.site.urls),
 ]
